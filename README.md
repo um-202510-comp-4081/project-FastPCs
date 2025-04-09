@@ -1,8 +1,8 @@
 # Team FastPCs
-
 ## Team Members
- 
--Garrett Sueing
+
+- Latrell Price
+- Garrett Sueing
 
 ## How to Initialize and Run the App
 ...
