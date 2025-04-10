@@ -4,6 +4,7 @@
 - Latrell Price(ljprice@memphis.edu)
 - Asiah Clark (aaclark1@memphis.edu)
 - Garrett Sueing (gqsueing@memphis.edu)
+- Yahia Nahhas (ynahhas@memphis.edu)
 
 
 ## How to Initialize and Run the App
