@@ -2,7 +2,8 @@
 ## Team Members
 
 - Latrell Price
-- Garrett Sueing (gqsueing@memphis.edu)
+- Garrett Sueing
+- Asiah Clark
 
 ## How to Initialize and Run the App
 ...
