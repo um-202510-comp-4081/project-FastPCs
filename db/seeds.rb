@@ -30,3 +30,14 @@ Readypc.create!(
     color:  'Silver',
     price:  899.99
 )
+
+Readypc.create!(
+    brand:  'Lenovo',
+    name:   'Yogi 7i 2-in-1',
+    size:   16,
+    processor: 'Intel Core Ultra 7',
+    ram:    16,
+    storage: '1TB SSD',
+    color:  'Storm Grey',
+    price:  749.99
+)
