@@ -1,0 +1,2 @@
+class BuildPc < ApplicationRecord
+end
