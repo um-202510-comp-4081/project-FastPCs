@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -20,5 +19,4 @@ Rails.application.routes.draw do
   get 'build', to: 'pages#build', as: 'build'
   get 'accessories', to: 'pages#accessories', as: 'accessories'
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
-
 end
