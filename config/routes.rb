@@ -18,7 +18,10 @@ Rails.application.routes.draw do
   root to: redirect('/home')
 
   get 'home', to: 'pages#home', as: 'home'
-  get 'cart', to: 'pages#cart', as: 'cart'
+
+  #Cart Routes
+  get '/cart', to: 'cart#show', as: 'cart'
+  
   get 'build', to: 'pages#build', as: 'build'
   get 'accessories', to: 'pages#accessories', as: 'accessories'
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
