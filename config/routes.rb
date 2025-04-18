@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home', as: 'home'
   get 'login', to: 'pages#login', as: 'login'
   get 'cart', to: 'pages#cart', as: 'cart'
+  resources :build_pcs
   get 'build', to: 'pages#build', as: 'build'
   get 'accessories', to: 'pages#accessories', as: 'accessories'
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
