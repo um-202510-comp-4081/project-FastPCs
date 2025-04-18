@@ -22,7 +22,15 @@ Rails.application.routes.draw do
   #Cart Routes
   get '/cart', to: 'cart#show', as: 'cart'
   
+  #Cart Items Routes
+  post '/cart_items', to: 'cart_items#create',  as: :cart_items
+  
   get 'build', to: 'pages#build', as: 'build'
+
+  #Accessories Routes
   get 'accessories', to: 'pages#accessories', as: 'accessories'
+  get '/accessories/:accessory_name', to: 'accessories#show', as: 'accessory'
+
+
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
 end

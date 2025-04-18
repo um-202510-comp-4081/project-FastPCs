@@ -1,0 +1,8 @@
+
+
+<% @accessories.each do |accessory| %>
+    <h1><%= accessory.name%> - <%= accessory.price%></h1>
+    <p><%= accessory.description %></p> <%= button_to "Cart", cart_items_path(product_id: accessory.product.id), method: :post, class: 'btn btn-success' %>
+    <p><%= link_to "View", accessory_path(accessory_name: accessory.name), class: 'btn btn-primary'%>
+
+<% end%>
