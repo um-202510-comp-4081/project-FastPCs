@@ -1,4 +1,4 @@
-<%= form_with model: @build_pc, local: true do |form| %>
+<%= form_with model: @build_pc, local: true, required: true do |form| %>
   <div>
     <%= form.label :name %>
     <%= form.text_field :name %>
@@ -6,32 +6,32 @@
 
   <div>
     <%= form.label :cpu %>
-    <%= form.select :cpu, BuildPc::CPU_PRICES.keys, include_blank: true, id: 'cpu-select' %>
+    <%= form.select :cpu, BuildPc::CPU_PRICES.keys, include_blank: true, required: true, id: 'cpu-select' %>
   </div>
 
   <div>
     <%= form.label :gpu %>
-    <%= form.select :gpu, BuildPc::GPU_PRICES.keys, include_blank: true, id: 'gpu-select' %>
+    <%= form.select :gpu, BuildPc::GPU_PRICES.keys, include_blank: true, required: true, id: 'gpu-select' %>
   </div>
 
   <div>
     <%= form.label :ram %>
-    <%= form.select :ram, BuildPc::RAM_PRICES.keys, include_blank: true, id: 'ram-select' %>
+    <%= form.select :ram, BuildPc::RAM_PRICES.keys, include_blank: true, required: true, id: 'ram-select' %>
   </div>
 
   <div>
     <%= form.label :storage %>
-    <%= form.select :storage, BuildPc::STORAGE_PRICES.keys, include_blank: true, id: 'storage-select' %>
+    <%= form.select :storage, BuildPc::STORAGE_PRICES.keys, include_blank: true, required: true, id: 'storage-select' %>
   </div>
 
   <div>
     <%= form.label :mobo %>
-    <%= form.select :mobo, BuildPc::MOBO_PRICES.keys, include_blank: true, id: 'mobo-select' %>
+    <%= form.select :mobo, BuildPc::MOBO_PRICES.keys, include_blank: true, required: true, id: 'mobo-select' %>
   </div>
 
   <div>
     <%= form.label :price %>
-    <%= form.text_field :price, value: @build_pc.price, readonly: true, id: 'price-field' %>
+    <%= form.text_field :price, value: @build_pc.price, readonly: true, required: true, id: 'price-field' %>
   </div>
 
   <%= form.submit "Create Build" %>

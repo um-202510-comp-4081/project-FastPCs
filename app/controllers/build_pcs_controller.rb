@@ -14,6 +14,11 @@ class BuildPcsController < ApplicationController
     @mobo_options    = BuildPc.distinct.pluck(:mobo).compact
   end
 
+  def edit
+    @build_pc = BuildPc.find(params[:id])
+    load_dropdown_options
+  end
+
   def create
     @build_pc = BuildPc.new(build_pc_params)
 
@@ -27,6 +32,16 @@ class BuildPcsController < ApplicationController
     end
   end
 
+  def update
+    @build_pc = BuildPc.find(params[:id])
+    if @build_pc.update(build_pc_params)
+      redirect_to build_pcs_path, notice: 'PC build was successfully updated.'
+    else
+      load_dropdown_options
+      render :edit
+    end
+  end
+
   def destroy
     @build_pc = BuildPc.find(params[:id])
     @build_pc.destroy
@@ -36,6 +51,14 @@ class BuildPcsController < ApplicationController
   private
 
   def build_pc_params
-    params.require(:build_pc).permit(:name, :cpu, :gpu, :ram, :storage, :mobo)
+    params.require(:build_pc).permit(:name, :cpu, :gpu, :ram, :storage, :mobo, :price)
+  end
+
+  def load_dropdown_options
+    @cpu_options = BuildPc::CPU_PRICES.keys
+    @gpu_options = BuildPc::GPU_PRICES.keys
+    @ram_options = BuildPc::RAM_PRICES.keys
+    @storage_options = BuildPc::STORAGE_PRICES.keys
+    @mobo_options = BuildPc::MOBO_PRICES.keys
   end
 end

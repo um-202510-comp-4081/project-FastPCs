@@ -17,6 +17,8 @@
 #
 
 class BuildPc < ApplicationRecord
+  validates :name, :cpu, :gpu, :ram, :storage, :mobo, :price, presence: true
+
   CPU_PRICES = {
     'Ryzen 5 5600X'   => 180,
     'Intel i7-10700K' => 300,
@@ -48,12 +50,11 @@ class BuildPc < ApplicationRecord
   }
 
   STORAGE_PRICES = {
-    '512 GB SSD' => 60,
-    '1 TB'       => 90,
-    '1 TB SSD'   => 100,
-    '2 TB'       => 130,
-    '2 TB SSD'   => 160,
-    '4 TB SSD'   => 300
+    '500 GB' => 45,
+    '512 GB' => 60,
+    '1 TB'   => 90,
+    '2 TB'   => 130,
+    '4 TB'   => 300
   }
 
   MOBO_PRICES = {
@@ -66,6 +67,7 @@ class BuildPc < ApplicationRecord
     'ASRock H510M'            => 70,
     'MSI B450 TOMAHAWK MAX'   => 100
   }
+
   def calculate_total_price
     cpu_price = CPU_PRICES[cpu] || 0
     gpu_price = GPU_PRICES[gpu] || 0

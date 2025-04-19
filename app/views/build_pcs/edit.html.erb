@@ -1,0 +1,40 @@
+<%= form_with model: @build_pc, local: true, required: true do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :cpu %><br>
+    <%= form.select :cpu, @cpu_options, include_blank: true, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :gpu %><br>
+    <%= form.select :gpu, @gpu_options, include_blank: true, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :ram %><br>
+    <%= form.select :ram, @ram_options, include_blank: true, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :storage %><br>
+    <%= form.select :storage, @storage_options, include_blank: true, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :mobo %><br>
+    <%= form.select :mobo, @mobo_options, include_blank: true, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :price %><br>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.submit 'Update PC' %>
+  </div>
+<% end %>

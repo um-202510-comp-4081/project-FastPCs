@@ -25,7 +25,11 @@
         <td>
              <%= button_to 'Delete', build_pc_path(build), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
+        <td>
+            <%= link_to 'Edit', edit_build_pc_path(build) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%# <%= link_to 'Create a', new_build_pc_path %> 
