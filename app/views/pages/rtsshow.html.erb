@@ -1,0 +1,35 @@
+<style>
+  .show-pc-image {
+    max-width: 600px;
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    margin: 20px auto;
+  }
+</style>
+
+<%= image_tag "pc#{@readypc.id}.jpg", alt: @readypc.name, class: "show-pc-image" %>
+
+<h1><%= @readypc.name %></h1>
+ 
+<p>
+  $ <%= @readypc.price %>
+</p>
+
+<p>
+  Brand: <%= @readypc.brand %>
+</p>
+
+<p>
+  Processor: <%= @readypc.processor %>
+</p>
+  
+<p>
+  RAM: <%= @readypc.ram %> GB
+</p>
+
+<p>
+  Storage: <%= @readypc.storage %>
+</p>
+
+<%= link_to "Back", readytoship_path %>

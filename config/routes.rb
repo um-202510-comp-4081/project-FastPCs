@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   get 'build', to: 'pages#build', as: 'build'
   get 'accessories', to: 'pages#accessories', as: 'accessories'
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
+  get 'readytoship/:id', to: 'pages#rtsshow', as: 'readytoships'
 
 end
