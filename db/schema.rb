@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema[7.1].define(version: 2025_04_17_223217) do
 
   enable_extension "plpgsql"
@@ -50,6 +49,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_223217) do
     t.string "ram"
     t.string "storage"
     t.string "mobo"
+
+  create_table "readypcs", force: :cascade do |t|
+    t.string "brand"
+    t.string "name"
+    t.decimal "size"
+    t.string "processor"
+    t.integer "ram"
+    t.string "storage"
+    t.string "color"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
