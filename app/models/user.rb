@@ -22,11 +22,22 @@
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
-  validates :password,
-            length: { minimum: 6, message: 'must be at least 6 characters' },
-            if:     -> { new_record? || !password.nil? }
+  # :confirmable, :lockable, :timeoutable, :trackable and :
+  
+       def create_cart_for_user
+              create_cart
+       end
+       
+       has_one :cart, dependent: :destroy
+       
+       after_create :create_cart_for_user
+       
+       devise :database_authenticatable, :registerable,
+       :recoverable, :rememberable, :validatable
+       
+       validates :password,
+       length: { minimum: 6, message: 'must be at least 6 characters' },
+       if:     -> { new_record? || !password.nil? }
+       
+       
 end

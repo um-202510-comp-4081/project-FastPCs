@@ -8,7 +8,7 @@
   }
 </style>
 
-<%= image_tag "pc#{@readypc.id}.jpg", alt: @readypc.name, class: "show-pc-image" %>
+<%= image_tag "placeholderlaptop.jpg", alt: @readypc.name, class: "show-pc-image" %>
 
 <h1><%= @readypc.name %></h1>
  
@@ -31,5 +31,5 @@
 <p>
   Storage: <%= @readypc.storage %>
 </p>
-
+<%= button_to "Cart", cart_items_path(product_id: @readypc.product.id), method: :post, class: 'btn btn-success' %>
 <%= link_to "Back", readytoship_path %>

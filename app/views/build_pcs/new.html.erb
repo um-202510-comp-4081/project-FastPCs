@@ -1,39 +1,119 @@
-<%= form_with model: @build_pc, local: true, required: true do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<h1> Build Your Custom PC </h1>
 
-  <div>
-    <%= form.label :cpu %>
-    <%= form.select :cpu, BuildPc::CPU_PRICES.keys, include_blank: true, required: true, id: 'cpu-select' %>
-  </div>
+<%= bootstrap_form_with model: @build_pc, url: build_path,  method: :post, data: { turbo: false } do |f| %>
+  <div class='field'>
+    <%= f.label :name, 'PC Name'%>
+    <%= f.text_field :name %>
+    
+    <%= f.label :cpu, 'CPU'%>
+    <%= f.select :cpu, BuildPc::CPU_PRICES.keys, {include_blank: true}, {required: true, id: 'cpu-select'} %>
 
-  <div>
-    <%= form.label :gpu %>
-    <%= form.select :gpu, BuildPc::GPU_PRICES.keys, include_blank: true, required: true, id: 'gpu-select' %>
-  </div>
+    <%= f.label :gpu, 'GPU'%>
+    <%= f.select :gpu, BuildPc::GPU_PRICES.keys, {include_blank: true}, {required: true, id: 'gpu-select'} %>
 
-  <div>
-    <%= form.label :ram %>
-    <%= form.select :ram, BuildPc::RAM_PRICES.keys, include_blank: true, required: true, id: 'ram-select' %>
-  </div>
 
-  <div>
-    <%= form.label :storage %>
-    <%= form.select :storage, BuildPc::STORAGE_PRICES.keys, include_blank: true, required: true, id: 'storage-select' %>
-  </div>
+    <%= f.label :ram, 'RAM'%>
+    <%= f.select :ram, BuildPc::RAM_PRICES.keys, {include_blank: true}, {required: true, id: 'ram-select'} %>
 
-  <div>
-    <%= form.label :mobo %>
-    <%= form.select :mobo, BuildPc::MOBO_PRICES.keys, include_blank: true, required: true, id: 'mobo-select' %>
-  </div>
+    <%= f.label :storage, 'Storage'%>
+    <%= f.select :storage, BuildPc::STORAGE_PRICES.keys, {include_blank: true}, {required: true, id: 'storage-select'} %>
+    
+    <%= f.label :mobo, 'MOBO'%>
+    <%= f.select :mobo, BuildPc::MOBO_PRICES.keys, {include_blank: true}, {required: true, id: 'mobo-select'} %>
 
-  <div>
-    <%= form.label :price %>
-    <%= form.text_field :price, value: @build_pc.price, readonly: true, required: true, id: 'price-field' %>
+    <%= f.label :price, 'Total'%>
+    <%= f.text_field :price, readonly: true, id: 'price-field' %>
+  
   </div>
+  
+    <%= f.submit "Build" %>
 
-  <%= form.submit "Create Build" %>
 <% end %>
 
+<script>
+  // Run on initial page load
+  document.addEventListener("DOMContentLoaded", function () {
+    const prices = {
+      cpu:     <%= BuildPc::CPU_PRICES.to_json.html_safe %>,
+      gpu:     <%= BuildPc::GPU_PRICES.to_json.html_safe %>,
+      ram:     <%= BuildPc::RAM_PRICES.to_json.html_safe %>,
+      storage: <%= BuildPc::STORAGE_PRICES.to_json.html_safe %>,
+      mobo:    <%= BuildPc::MOBO_PRICES.to_json.html_safe %>
+    };
+
+    const selects = {
+      cpu:     document.getElementById("cpu-select"),
+      gpu:     document.getElementById("gpu-select"),
+      ram:     document.getElementById("ram-select"),
+      storage: document.getElementById("storage-select"),
+      mobo:    document.getElementById("mobo-select")
+    };
+
+    const priceField = document.getElementById("price-field");
+
+    function calculateTotal() {
+      let total = 0;
+
+      for (const component in selects) {
+        const selected = selects[component]?.value;
+        if (selected && prices[component][selected]) {
+          total += prices[component][selected];
+        }
+      }
+
+      priceField.value = total.toFixed(2);
+      const pricePreview = document.getElementById('price-preview');
+      if (pricePreview) pricePreview.textContent = total.toFixed(2);
+    }
+
+    for (const component in selects) {
+      const sel = selects[component];
+      if (sel) sel.addEventListener("change", calculateTotal);
+    }
+
+    calculateTotal();
+  });
+
+  // Reload after Turbo
+  document.addEventListener("turbo:load", function () {
+    const prices = {
+      cpu:     <%= BuildPc::CPU_PRICES.to_json.html_safe %>,
+      gpu:     <%= BuildPc::GPU_PRICES.to_json.html_safe %>,
+      ram:     <%= BuildPc::RAM_PRICES.to_json.html_safe %>,
+      storage: <%= BuildPc::STORAGE_PRICES.to_json.html_safe %>,
+      mobo:    <%= BuildPc::MOBO_PRICES.to_json.html_safe %>
+    };
+
+    const selects = {
+      cpu:     document.getElementById("cpu-select"),
+      gpu:     document.getElementById("gpu-select"),
+      ram:     document.getElementById("ram-select"),
+      storage: document.getElementById("storage-select"),
+      mobo:    document.getElementById("mobo-select")
+    };
+
+    const priceField = document.getElementById("price-field");
+
+    function calculateTotal() {
+      let total = 0;
+
+      for (const component in selects) {
+        const selected = selects[component]?.value;
+        if (selected && prices[component][selected]) {
+          total += prices[component][selected];
+        }
+      }
+
+      priceField.value = total.toFixed(2);
+      const pricePreview = document.getElementById('price-preview');
+      if (pricePreview) pricePreview.textContent = total.toFixed(2);
+    }
+
+    for (const component in selects) {
+      const sel = selects[component];
+      if (sel) sel.addEventListener("change", calculateTotal);
+    }
+
+    calculateTotal();
+  });
+</script>

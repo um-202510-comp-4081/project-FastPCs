@@ -1,64 +1,65 @@
 # frozen_string_literal: true
 
 class BuildPcsController < ApplicationController
-  def index
-    @build_pcs = BuildPc.all
-  end
-
   def new
     @build_pc = BuildPc.new
-    @cpu_options     = BuildPc.distinct.pluck(:cpu).compact
-    @gpu_options     = BuildPc.distinct.pluck(:gpu).compact
-    @ram_options     = BuildPc.distinct.pluck(:ram).compact
-    @storage_options = BuildPc.distinct.pluck(:storage).compact
-    @mobo_options    = BuildPc.distinct.pluck(:mobo).compact
+    render :new
+  end
+
+  def create
+    build_pc_product = Product.create!(
+      name: params[:build_pc][:name],
+      price: params[:build_pc][:price],
+      description: "#{params[:build_pc][:cpu]}, #{params[:build_pc][:gpu]}, #{params[:build_pc][:ram]} RAM, #{params[:build_pc][:storage]} storage, #{params[:build_pc][:mobo]} motherboard",
+      product_type: 'BuildPC')
+
+    @build_pc = BuildPc.new(params.require(:build_pc).permit(:name, :cpu, :gpu, :ram, :storage, :mobo, :price))
+    @build_pc.product = build_pc_product
+    @build_pc.price = @build_pc.calculate_total_price
+
+    if @build_pc.save
+      current_user.cart.cart_items.create!(product: build_pc_product)
+      redirect_to cart_path
+    else
+      flash.now[:error] = "Failed to build custom pc"
+      render :new
+    end
+    
   end
 
   def edit
     @build_pc = BuildPc.find(params[:id])
-    load_dropdown_options
-  end
-
-  def create
-    @build_pc = BuildPc.new(build_pc_params)
-
-    # Calculate total price and set it before saving
-    @build_pc.price = @build_pc.calculate_total_price
-
-    if @build_pc.save
-      redirect_to build_pcs_url, notice: 'PC Build was successfully created.'
-    else
-      render :new
-    end
+    render :edit
   end
 
   def update
     @build_pc = BuildPc.find(params[:id])
-    if @build_pc.update(build_pc_params)
-      redirect_to build_pcs_path, notice: 'PC build was successfully updated.'
-    else
-      load_dropdown_options
-      render :edit
-    end
-  end
 
-  def destroy
-    @build_pc = BuildPc.find(params[:id])
-    @build_pc.destroy
-    redirect_to build_pcs_url, notice: 'PC build was successfully deleted.'
+      if @build_pc.update(build_pc_params)
+        new_price = @build_pc.calculate_total_price
+        @build_pc.update_column(:price, new_price)
+
+        @build_pc.product.update(
+          name: @build_pc.name,
+          price: new_price,
+          description: "#{@build_pc.cpu}, #{@build_pc.gpu}, #{@build_pc.ram} RAM, #{@build_pc.storage} storage, #{@build_pc.mobo} motherboard"
+        )
+
+        redirect_to cart_path, notice: "#{@build_pc.name} has been updated"
+      
+      else
+        render :edit
+
+      end
+
   end
 
   private
 
   def build_pc_params
-    params.require(:build_pc).permit(:name, :cpu, :gpu, :ram, :storage, :mobo, :price)
+    params
+      .require(:build_pc)
+      .permit(:name, :cpu, :gpu, :ram, :storage, :mobo, :price)
   end
 
-  def load_dropdown_options
-    @cpu_options = BuildPc::CPU_PRICES.keys
-    @gpu_options = BuildPc::GPU_PRICES.keys
-    @ram_options = BuildPc::RAM_PRICES.keys
-    @storage_options = BuildPc::STORAGE_PRICES.keys
-    @mobo_options = BuildPc::MOBO_PRICES.keys
-  end
 end

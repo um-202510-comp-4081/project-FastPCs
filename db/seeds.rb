@@ -1,132 +1,79 @@
+# === READY PCS ===
+ready_pcs = [
+  { brand: 'HP', name: 'Envy 2-in-1', size: 16, processor: 'Intel Core Ultra 7', ram: 32, storage: '2TB SSD', color: 'Glacier Silver', price: 1449.99 },
+  { brand: 'Apple', name: 'MacBook Pro', size: 16.2, processor: 'Apple M4 Pro chip', ram: 24, storage: '512GB SSD', color: 'Space Black', price: 2499.00 },
+  { brand: 'Samsung', name: 'Galaxy Book 4', size: 15.6, processor: 'Intel Core 7', ram: 16, storage: '512GB SSD', color: 'Silver', price: 899.99 },
+  { brand: 'Lenovo', name: 'Yogi 7i 2-in-1', size: 16, processor: 'Intel Core Ultra 7', ram: 16, storage: '1TB SSD', color: 'Storm Grey', price: 749.99 }
+]
+
+ready_pcs.each do |spec|
+  product = Product.create!(
+    name: spec[:name],
+    price: spec[:price],
+    description: "#{spec[:brand]} #{spec[:name]} with #{spec[:processor]}, #{spec[:ram]} GB RAM, #{spec[:storage]}, Color: #{spec[:color]}",
+    product_type: 'ReadyPC'
+  )
+
+  Readypc.create!(
+    brand: spec[:brand],
+    name: spec[:name],
+    size: spec[:size],
+    processor: spec[:processor],
+    ram: spec[:ram],
+    storage: spec[:storage],
+    color: spec[:color],
+    price: spec[:price],
+    product: product
+  )
+end
 
 
+# === ACCESSORIES ===
+accessories = [
+  # Keyboards
+  { name: 'Wireless Keyboard', price: 19.99, description: 'Bluetooth Wireless Keyboard' },
+  { name: 'Mechanical Keyboard', price: 49.99, description: 'RGB Backlit Mechanical Keyboard' },
+  { name: 'Compact Keyboard', price: 24.99, description: '60% Compact Gaming Keyboard' },
 
-BuildPc.create!(
-  name:    'PC 1',
-  cpu:     'Ryzen 5 5600X',
-  gpu:     'Nvidia RTX 4060',
-  ram:     '32 GB',
-  storage: '2 TB',
-  mobo:    'ASrock B450M',
-  price:   850.00
-)
+  # Mice
+  { name: 'Gaming Mouse', price: 29.99, description: 'High DPI RGB Gaming Mouse' },
+  { name: 'Wireless Mouse', price: 34.99, description: 'Ergonomic Wireless Gaming Mouse' },
+  { name: 'Lightweight Mouse', price: 39.99, description: 'Ultra-light FPS Gaming Mouse' },
 
-BuildPc.create!(
-  name:    'PC 2',
-  cpu:     'Intel i7-10700K',
-  gpu:     'Nvidia RTX 3070',
-  ram:     '16 GB',
-  storage: '1 TB',
-  mobo:    'MSI Z490-A PRO',
-  price:   1200.00
-)
+  # Headphones
+  { name: 'Gaming Headset', price: 59.99, description: 'Surround Sound Gaming Headset' },
+  { name: 'Wireless Headset', price: 69.99, description: '2.4GHz Wireless Gaming Headset with Mic' },
+  { name: 'Noise Cancelling Headphones', price: 89.99, description: 'Over-ear ANC Headphones' },
 
-BuildPc.create!(
-  name:    'PC 3',
-  cpu:     'AMD Ryzen 9 5900X',
-  gpu:     'Nvidia RTX 3080',
-  ram:     '64 GB',
-  storage: '2 TB',
-  mobo:    'Asus ROG Crosshair VIII Hero',
-  price:   2200.00
-)
+  # Chairs
+  { name: 'Gaming Chair', price: 129.99, description: 'Ergonomic Gaming Chair with Lumbar Support' },
+  { name: 'Racing Style Chair', price: 149.99, description: 'Reclining Racing Style Gaming Chair' },
+  { name: 'Mesh Back Chair', price: 109.99, description: 'Breathable Mesh Gaming Chair' },
 
-BuildPc.create!(
-  name:    'PC 4',
-  cpu:     'Intel i5-11600K',
-  gpu:     'Nvidia GTX 1660 Ti',
-  ram:     '32 GB',
-  storage: '1 TB',
-  mobo:    'Gigabyte Z590 AORUS ELITE',
-  price:   1000.00
-)
+  # Webcams
+  { name: '1080p Webcam', price: 59.99, description: 'Full HD Webcam with Auto Focus' },
+  { name: '4K Streaming Webcam', price: 99.99, description: 'Ultra HD 4K Streaming Webcam' },
+  { name: 'Webcam with Ring Light', price: 79.99, description: 'HD Webcam with Built-in Lighting' },
 
-BuildPc.create!(
-  name:    'PC 5',
-  cpu:     'Intel i9-12900K',
-  gpu:     'Nvidia RTX 4090',
-  ram:     '128 GB',
-  storage: '4 TB',
-  mobo:    'Asus ROG Strix Z690-E',
-  price:   3500.00
-)
+  # Monitors
+  { name: '144Hz Gaming Monitor', price: 199.99, description: '27-inch 144Hz Full HD Gaming Monitor' },
+  { name: '240Hz Esports Monitor', price: 299.99, description: '24-inch 240Hz Competitive Gaming Monitor' },
+  { name: 'Curved Ultrawide Monitor', price: 349.99, description: '34-inch Curved Ultrawide Gaming Monitor' }
+]
 
-BuildPc.create!(
-  name:    'PC 6',
-  cpu:     'AMD Ryzen 7 5800X',
-  gpu:     'Nvidia RTX 3060 Ti',
-  ram:     '32 GB',
-  storage: '1 TB',
-  mobo:    'MSI MAG B550 TOMAHAWK',
-  price:   1500.00
-)
+accessories.each do |spec|
+  product = Product.create!(
+    name: spec[:name],
+    price: spec[:price],
+    description: spec[:description],
+    product_type: 'Accessory'
+  )
 
-BuildPc.create!(
-  name:    'PC 7',
-  cpu:     'Intel i5-10400F',
-  gpu:     'AMD Radeon RX 580',
-  ram:     '16 GB',
-  storage: '512 GB',
-  mobo:    'ASRock H510M',
-  price:   650.00
-)
-
-BuildPc.create!(
-  name:    'PC 8',
-  cpu:     'AMD Ryzen 5 3600',
-  gpu:     'Nvidia GTX 1650',
-  ram:     '8 GB',
-  storage: '500 GB',
-  mobo:    'MSI B450 TOMAHAWK MAX',
-  price:   500.00
-=======
-Readypc.create!(
-    brand:  'HP',
-    name:   'Envy 2-in-1',
-    size:   16,
-    processor: 'Intel Core Ultra 7',
-    ram:    32,
-    storage: '2TB SSD',
-    color:  'Glacier Silver',
-    price:  1449.99
-)
-
-Readypc.create!(
-    brand:  'Apple',
-    name:   'MacBook Pro',
-    size:   16.2,
-    processor: 'Apple M4 Pro chip',
-    ram:    24,
-    storage: '512GB SSD',
-    color:  'Spcae Black',
-    price:  2499.00
-)
-
-Readypc.create!(
-    brand:  'Samsung',
-    name:   'Galaxy Book 4',
-    size:   15.6,
-    processor: 'Intel Core 7',
-    ram:    16,
-    storage: '512GB SSD',
-    color:  'Silver',
-    price:  899.99
-)
-
-Readypc.create!(
-    brand:  'Lenovo',
-    name:   'Yogi 7i 2-in-1',
-    size:   16,
-    processor: 'Intel Core Ultra 7',
-    ram:    16,
-    storage: '1TB SSD',
-    color:  'Storm Grey',
-    price:  749.99
-)
-
-user1 = User.create!(
-  user:     'bob',
-  email:    'bob@email.com',
-  password: 'password'
-)
+  Accessory.create!(
+    name: spec[:name],
+    price: spec[:price],
+    description: spec[:description],
+    product: product
+  )
+end
 
