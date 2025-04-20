@@ -41,3 +41,10 @@ Readypc.create!(
     color:  'Storm Grey',
     price:  749.99
 )
+
+user1 = User.create!(
+  user:     'bob',
+  email:    'bob@email.com',
+  password: 'password'
+)
+

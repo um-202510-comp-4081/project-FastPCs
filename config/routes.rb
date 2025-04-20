@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
-  devise_for :users
+  devise_for :users, path: '', path_names: {
+    sign_in:  'login',
+    sign_out: 'logout',
+    sign_up:  'signup'
+  }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,11 +18,10 @@ Rails.application.routes.draw do
   root to: redirect('/home')
 
   get 'home', to: 'pages#home', as: 'home'
-  get 'login', to: 'pages#login', as: 'login'
   get 'cart', to: 'pages#cart', as: 'cart'
   get 'build', to: 'pages#build', as: 'build'
   get 'accessories', to: 'pages#accessories', as: 'accessories'
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
   get 'readytoship/:id', to: 'pages#rtsshow', as: 'readytoships'
-
+  
 end
