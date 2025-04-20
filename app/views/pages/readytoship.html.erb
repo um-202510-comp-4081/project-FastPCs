@@ -1,0 +1,50 @@
+<h1>Ready-To-Ship PCs</h1>
+<p>Choose from a premium selection of prebuilt PCs ready to ship to your house</p>
+
+<!-- Page-specific CSS -->
+<style>
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 1000px;
+    margin: 20px auto;
+  }
+
+  .image-grid a {
+    aspect-ratio: 1 / 1;
+    display: block;
+    overflow: hidden;
+  }
+
+  .image-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  .image-grid img:hover {
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- Link to pc show pages -->
+<div class="image-grid">
+  <div class="pc-item">
+    <%= link_to image_tag("pc1.jpg", alt: "PC 1"), readytoships_path(1) %>
+    <p class="pc-name">Envy 2-in-1</p>
+  </div>
+  <div class="pc-item">
+    <%= link_to image_tag("pc2.jpg", alt: "PC 2"), readytoships_path(2) %>
+    <p class="pc-name">MacBook Pro</p>
+  </div>
+  <div class="pc-item">
+    <%= link_to image_tag("pc3.jpg", alt: "PC 3"), readytoships_path(3) %>
+    <p class="pc-name">Galaxy Book 4</p>
+  </div>
+</div>
+
+<%= link_to "Back to Home", home_path %>
