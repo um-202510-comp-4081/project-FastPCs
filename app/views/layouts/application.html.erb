@@ -11,14 +11,19 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
 
     <%= render 'shared/flash' %>
 
 <nav class="main-nav">
     <div class="nav-left">
       <%= link_to "Home", home_path, class: "nav-item" %>
+
+      <% if user_signed_in?%>
+        <%=  link_to 'Cart', cart_path, class: 'nav-item' %>
+      <% end%>
     </div>
+
+
     <div class="nav-right">
       <% if user_signed_in? %>
         <span class="nav-item">Welcome <%= current_user.username %></span>

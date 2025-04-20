@@ -33,18 +33,13 @@
 
 <!-- Link to pc show pages -->
 <div class="image-grid">
+<% @readypcs.each do |readypc| %>
   <div class="pc-item">
-    <%= link_to image_tag("pc1.jpg", alt: "PC 1"), readytoships_path(1) %>
-    <p class="pc-name">Envy 2-in-1</p>
+    <%= link_to image_tag('placeholderlaptop.jpg', alt: "PC Image"), readytoships_path(readypc) %>
+    <p class="pc-name"><%= readypc.name %></p>
+    <%= button_to "Cart", cart_items_path(product_id: readypc.product.id), method: :post, class: 'btn btn-success' %>
   </div>
-  <div class="pc-item">
-    <%= link_to image_tag("pc2.jpg", alt: "PC 2"), readytoships_path(2) %>
-    <p class="pc-name">MacBook Pro</p>
-  </div>
-  <div class="pc-item">
-    <%= link_to image_tag("pc3.jpg", alt: "PC 3"), readytoships_path(3) %>
-    <p class="pc-name">Galaxy Book 4</p>
-  </div>
+<% end %>
 </div>
 
 <%= link_to "Back to Home", home_path %>

@@ -10,12 +10,27 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   root to: redirect('/home')
-
   get 'home', to: 'pages#home', as: 'home'
-  get 'cart', to: 'pages#cart', as: 'cart'
-  resources :build_pcs
+  
+  #BuildPC Routes
   get 'build', to: 'pages#build', as: 'build'
+  resources :build_pcs, path: 'build', only: [:new, :create, :edit, :update]
+  
+
+  #Cart Routes
+  get '/cart', to: 'cart#show', as: 'cart'
+  delete '/cart', to: 'cart#destroy'
+  
+  #Cart Items Routes
+  post '/cart_items', to: 'cart_items#create',  as: :cart_items
+  delete '/cart_items/:id', to: 'cart_items#destroy', as: :cart_item
+
+  #Accessories Routes
   get 'accessories', to: 'pages#accessories', as: 'accessories'
+  get '/accessories/:accessory_name', to: 'accessories#show', as: 'accessory'
+  
+
+  #ReadyToShipPC Routes
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
   get 'readytoship/:id', to: 'pages#rtsshow', as: 'readytoships'
 

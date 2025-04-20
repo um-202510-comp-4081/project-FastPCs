@@ -1,0 +1,25 @@
+<h1>Shopping Cart</h1> <h2> 
+
+<% count = @cart.cart_items.count %>
+
+<h2> <%= count %> <%= count == 1 ? 'item' : 'items' %></h2>
+
+<ul>
+
+    <% @cart.cart_items.includes(:product).each do |item| %>
+        <li><%= item.product.name%> - <%= item.product.description %> - $<%= item.product.price%> </li>
+         <td><%= button_to "Remove", cart_item_path(item), method: :delete, data: { turbo: false } %></td>
+        <% if item.product.product_type == 'BuildPC'%>
+            <% build_pc = item.product.build_pc %>
+            <%= link_to 'Edit', edit_build_pc_path(build_pc), class: 'btn btn-sm btn-primary' %>
+            
+        <% end%>
+    <% end%>
+    
+</ul>
+
+<%= button_to "Clear", cart_path(@cart), method: :delete, data: { turbo: false } %>
+
+<% total_price = @cart.cart_items.sum { |item| item.product.price } %>
+
+checkout_btn <h3>Total - $<%= total_price%></h3>

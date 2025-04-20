@@ -15,9 +15,21 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
+#  product_id :bigint           not null
+#
+# Indexes
+#
+#  index_build_pcs_on_product_id  (product_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (product_id => products.id)
+#
 class BuildPc < ApplicationRecord
   validates :name, :cpu, :gpu, :ram, :storage, :mobo, :price, presence: true
+  belongs_to :product
+  has_one :cart_item, through: :product, dependent: :destroy
+
 
   CPU_PRICES = {
     'Ryzen 5 5600X'   => 180,
