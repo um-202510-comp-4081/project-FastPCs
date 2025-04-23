@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class BuildPcsController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     @build_pc = BuildPc.new
     render :new
   end
-
+  
   def create
     build_pc_product = Product.create!(
       name: params[:build_pc][:name],
