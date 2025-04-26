@@ -7,13 +7,20 @@
 <ul>
 
     <% @cart.cart_items.includes(:product).each do |item| %>
-        <li><%= item.product.name%> - <%= item.product.description %> - $<%= item.product.price%> </li>
-         <td><%= button_to "Remove", cart_item_path(item), method: :delete, data: { turbo: false } %></td>
+
+        <li>
+            <%= image_tag item.product.image, alt: item.product.image, style: 'width: 100px; height: auto;' %>
+            <p><%= item.product.name%> - <%= item.product.description %> - $<%= item.product.price%></p>
+        </li>
+
+        <td><%= button_to "Remove", cart_item_path(item), method: :delete, data: { turbo: false } %></td>
         <% if item.product.product_type == 'BuildPC'%>
             <% build_pc = item.product.build_pc %>
             <%= link_to 'Edit', edit_build_pc_path(build_pc), class: 'btn btn-sm btn-primary' %>
             
         <% end%>
+
+
     <% end%>
     
 </ul>

@@ -28,6 +28,13 @@ Rails.application.routes.draw do
   #Accessories Routes
   get 'accessories', to: 'pages#accessories', as: 'accessories'
   get '/accessories/:accessory_name', to: 'accessories#show', as: 'accessory'
+
+  get '/keyboards', to: 'accessories#keyboards', as: 'keyboards'
+  get '/mouses', to: 'accessories#mouses', as: 'mouses'
+  get '/chairs', to: 'accessories#chairs', as: 'chairs'
+  get '/monitors', to: 'accessories#monitors', as: 'monitors'
+  get '/headsets', to: 'accessories#headsets', as: 'headsets'
+  get '/webcams', to: 'accessories#webcams', as: 'webcams'
   
 
   #ReadyToShipPC Routes

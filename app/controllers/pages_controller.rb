@@ -15,7 +15,6 @@ class PagesController < ApplicationController
     end
 
     def accessories
-        @accessories = Accessory.all
         render :accessories
     end
     

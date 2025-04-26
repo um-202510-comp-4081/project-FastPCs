@@ -1,8 +1,9 @@
 
+<% size = "350x300"%>
 
-<% @accessories.each do |accessory| %>
-    <h1><%= accessory.name%> - <%= accessory.price%></h1>
-    <p><%= accessory.description %></p> <%= button_to "Cart", cart_items_path(product_id: accessory.product.id), method: :post, class: 'btn btn-success' %>
-    <p><%= link_to "View", accessory_path(accessory_name: accessory.name), class: 'btn btn-primary'%>
-
-<% end%>
+<h1><%= link_to image_tag("accessories/keyboard_icon.jpeg", alt: "Keyboard_img", size: size), keyboards_path %></h1>
+<h1><%= link_to image_tag("accessories/mouse_icon.png", alt: "Mouse_img", size: size), mouses_path %></h1>
+<h1><%= link_to image_tag("accessories/chair_icon.jpeg", alt: "Chair_img", size: size), chairs_path %></h1>
+<h1><%= link_to image_tag("accessories/webcam_icon.jpg", alt: "Webcam_img", size: size), webcams_path %></h1>
+<h1><%= link_to image_tag("accessories/headset_icon.png", alt: "Headset_img", size: size), headsets_path %></h1>
+<h1><%= link_to image_tag("accessories/monitor_icon.jpeg", alt: "Monitor_img", size: size), monitors_path %></h1>
