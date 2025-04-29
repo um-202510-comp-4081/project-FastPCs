@@ -33,11 +33,14 @@
   </div>
 
   <div>
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up"%>
   </div>
 <% end %>
 
 <p>
-  <%= link_to "Log In", new_user_session_path %> |
   <%= link_to "Back to Home", home_path %>
 </p>
+
+<p>
+   <%= link_to "Back to Login", new_user_session_path %>
+   </p>

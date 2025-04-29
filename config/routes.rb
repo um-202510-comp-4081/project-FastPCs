@@ -11,28 +11,25 @@ Rails.application.routes.draw do
 
   root to: redirect('/home')
   get 'home', to: 'pages#home', as: 'home'
-  
-  #BuildPC Routes
-  get 'build', to: 'pages#build', as: 'build'
-  resources :build_pcs, path: 'build', only: [:new, :create, :edit, :update]
-  
 
-  #Cart Routes
+  # BuildPC Routes
+  get 'build', to: 'pages#build', as: 'build'
+  resources :build_pcs, path: 'build', only: %i[new create edit update]
+
+  # Cart Routes
   get '/cart', to: 'cart#show', as: 'cart'
   delete '/cart', to: 'cart#destroy'
-  
-  #Cart Items Routes
-  post '/cart_items', to: 'cart_items#create',  as: :cart_items
-  delete '/cart_items/:id', to: 'cart_items#destroy', as: :cart_item
 
-  #Accessories Routes
+  # Cart Items Routes
+  post '/cart_items', to: 'cart_items#create', as: :cart_items
+  delete '/cart_items/:id', to: 'cart_items#destroy', as: :cart_item
+  post '/checkout', to: 'cart#checkout', as: 'checkout'
+
+  # Accessories Routes
   get 'accessories', to: 'pages#accessories', as: 'accessories'
   get '/accessories/:accessory_name', to: 'accessories#show', as: 'accessory'
-  
 
-  #ReadyToShipPC Routes
+  # ReadyToShipPC Routes
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
   get 'readytoship/:id', to: 'pages#rtsshow', as: 'readytoships'
-
-  
 end
