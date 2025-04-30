@@ -1,5 +1,13 @@
-<%= image_tag @accessory.image, alt: @accessory.name, style: 'width: 350px; height: auto;' %>
-<h1><%= @accessory.name%> - <%= @accessory.price%></h1>
-<p><%= @accessory.description %></p>
+<div class="accessory-show-container">
+  <div class="accessory-image-wrapper">
+    <%= image_tag @accessory.image, alt: @accessory.name, class: 'accessory-show-image' %>
+  </div>
 
-<%= button_to "Cart", cart_items_path(product_id: @accessory.product.id), method: :post, class: 'btn btn-success' %>
+  <div class="accessory-details">
+    <h1 class="accessory-name"><%= @accessory.name %></h1>
+    <p class="accessory-price">$<%= @accessory.price %></p>
+    <p class="accessory-description"><%= @accessory.description %></p>
+
+    <%= button_to "Add to Cart", cart_items_path(product_id: @accessory.product.id), method: :post, class: 'btn-cart' %>
+  </div>
+</div>

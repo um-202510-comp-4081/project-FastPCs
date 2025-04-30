@@ -1,0 +1,11 @@
+<turbo-stream target="accessory-list" action="replace">
+  <template>
+    <%= render partial: "accessories/list", locals: { accessories: @accessories } %>
+  </template>
+</turbo-stream>
+
+<turbo-stream target="accessory-categories" action="replace">
+  <template>
+    <%= render partial: "accessories/categories" %>
+  </template>
+</turbo-stream>

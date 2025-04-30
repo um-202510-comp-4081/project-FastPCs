@@ -16,8 +16,11 @@
 @import "yeti/variables";
 @import "bootstrap";
 @import "yeti/bootswatch";
-
+@import 'accessories';
 @import "rails_bootstrap_forms";
+@import 'cart';
+
+
 
 label.required:after {
   content:" *";
@@ -59,3 +62,25 @@ main {
   color: #333;
 }
 
+.flash-message {
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin: 1rem auto;
+  max-width: 800px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
+}
+
+.flash-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
