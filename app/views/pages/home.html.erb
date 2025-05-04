@@ -1,14 +1,122 @@
-<h1>FastPCs</h1>
+<!-- Hero Section -->
+<div class="hero-section" style="
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, var(--retro-light), #d6f0ff, #e0d7ff);
+  border-bottom: 4px solid var(--retro-cyan);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+">
+  <h1 class="site-title" style="
+    font-size: 3.8rem;
+    color: var(--retro-purple);
+    text-shadow: 3px 3px var(--retro-cyan);
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  ">
+    WELCOME TO FAST PC's
+  </h1>
 
+  <p class="hero-subtitle" style="
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: var(--retro-dark);
+    margin-bottom: 5px;
+    text-shadow: 1px 1px rgba(34, 32, 52, 0.3);
+  ">
+    Ensuring Quality Gaming Ready PC's FAST!
+  </p>
+</div>
 
-<p>
-    <%= link_to 'Build Your PC', build_path %>
-</p>
+<!-- Image paths for JS -->
+<script>
+  window.galleryImagePaths = [
+    "<%= asset_path('gallery1.jpg') %>",
+    "<%= asset_path('gallery2.jpg') %>",
+    "<%= asset_path('gallery3.jpg') %>",
+    "<%= asset_path('gallery4.jpg') %>",
+    "<%= asset_path('gallery5.jpg') %>"
+  ];
+</script>
 
-<p>
-    <%= link_to 'Accessories', accessories_path %>
-</p>
+<!-- Manual Image Clicker -->
+<section style="padding: 20px 0; text-align: center;">
+  <h2 style="
+    font-size: 2.8rem;
+    color: var(--retro-purple);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  ">
+    Explore Our Gallery
+  </h2>
 
-<p>
-    <%= link_to 'Ready to Ship', readytoship_path %>
-</p>
+  <div id="image-gallery" style="position: relative; max-width: 900px; margin: 0 auto;">
+    <%= image_tag "gallery1.jpg", id: "gallery-image", alt: "Gallery", style: "width: 100%; height: auto; border: 5px solid var(--retro-cyan); border-radius: 12px; box-shadow: 0 6px 25px rgba(0,0,0,0.2);" %>
+
+    <!-- Navigation Buttons -->
+    <button onclick="prevImage()" style="
+      position: absolute; top: 50%; left: 10px;
+      transform: translateY(-50%);
+      background-color: var(--retro-blue);
+      color: white;
+      font-size: 2rem;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--retro-blue);
+    ">&larr;</button>
+
+    <button onclick="nextImage()" style="
+      position: absolute; top: 50%; right: 10px;
+      transform: translateY(-50%);
+      background-color: var(--retro-blue);
+      color: white;
+      font-size: 2rem;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--retro-blue);
+    ">&rarr;</button>
+  </div>
+</section>
+
+<!-- Personalized PC Services -->
+<main class="container" style="max-width: 1100px; margin: 0 auto; padding: 40px 20px;">
+  <div style="display: flex; flex-direction: column; gap: 50px;">
+
+    <% [
+      { img: "custom-pc.jpg", title: "Build Your Dream PC", color: "var(--retro-blue)", desc: "Craft a setup that's tailored exactly to your needs. Choose your parts and let our system guide you to perfection.", path: build_path, button: "Start Building" },
+      { img: "accessories-pc.jpg", title: "Premium Accessories", color: "var(--retro-green)", desc: "Complete your experience with high-performance accessories — from keyboards to ultra-precise gaming mice.", path: accessories_path, button: "Shop Accessories" },
+      { img: "prebuilt-pc.jpg", title: "Ready-to-Ship Systems", color: "var(--retro-purple)", desc: "Need speed without the wait? Explore our expertly configured PCs that ship out within 24 hours.", path: readytoship_path, button: "Browse Systems" }
+    ].each do |item| %>
+
+      <div style="
+        display: flex;
+        flex-direction: row;
+        background-color: var(--lighter-blue);
+        border: 2px solid <%= item[:color] %>;
+        border-radius: 14px;
+        padding: 30px;
+        align-items: center;
+        gap: 30px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      ">
+        <% image_style = "width: 220px; height: 220px; border-radius: 10px; border: 2px solid #{item[:color]}; object-fit: cover;" %>
+        <%= image_tag item[:img], alt: item[:title], style: image_style %>
+
+        <div style="flex: 1;">
+          <h2 style="font-size: 2.3rem; color: <%= item[:color] %>; margin-bottom: 10px;"><%= item[:title] %></h2>
+          <p style="font-size: 1.3rem; margin-bottom: 20px; color: var(--retro-dark); line-height: 1.6;"><%= item[:desc] %></p>
+          <% btn_style = "font-size: 1.2rem; padding: 12px 28px; background-color: #{item[:color]}; color: white; border-radius: 6px; font-weight: bold; box-shadow: 0 0 10px #{item[:color]};" %>
+          <%= link_to item[:button], item[:path], style: btn_style %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</main>
