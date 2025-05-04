@@ -1,46 +1,56 @@
-<h2>Sign Up</h2>
 
-<% if resource.errors.any? %>
-  <div id="error_explanation" style="color: red;">
-    <h3><%= pluralize(resource.errors.count, "error") %> prevented this account from being created:</h3>
-    <ul>
-      <% resource.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<div style="max-width: 500px; margin: 60px auto; text-align: center; padding: 40px; background: linear-gradient(to bottom right, #f7faff, #e8f0ff); border-radius: 16px; box-shadow: 0 6px 30px rgba(0,0,0,0.1);">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <div>
-    <%= f.label :username %><br>
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
-  </div>
+  <h2 style="color: var(--retro-purple); font-size: 2.2rem; margin-bottom: 25px;">Sign Up</h2>
 
-  <div>
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+  <% if resource.errors.any? %>
+    <div id="error_explanation" style="
+      background-color: #ffe5e5;
+      color: #b20000;
+      padding: 15px 20px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      text-align: left;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.1);
+    ">
+      <h3 style="margin-top: 0;"><%= pluralize(resource.errors.count, "error") %> prevented this account from being created:</h3>
+      <ul style="padding-left: 20px; margin-bottom: 0;">
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div>
-    <%= f.label :password, "Password (min 6 chars)" %><br>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div style="margin-bottom: 15px; text-align: left;">
+      <%= f.label :username, style: "font-weight: bold;" %><br>
+      <%= f.text_field :username, autofocus: true, autocomplete: "username", style: "width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" %>
+    </div>
 
-  <div>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div style="margin-bottom: 15px; text-align: left;">
+      <%= f.label :email, style: "font-weight: bold;" %><br>
+      <%= f.email_field :email, autocomplete: "email", style: "width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" %>
+    </div>
 
-  <div>
-    <%= f.submit "Sign up"%>
-  </div>
-<% end %>
+    <div style="margin-bottom: 15px; text-align: left;">
+      <%= f.label :password, "Password (min 6 chars)", style: "font-weight: bold;" %><br>
+      <%= f.password_field :password, autocomplete: "new-password", style: "width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" %>
+    </div>
 
-<p>
-  <%= link_to "Back to Home", home_path %>
-</p>
+    <div style="margin-bottom: 25px; text-align: left;">
+      <%= f.label :password_confirmation, style: "font-weight: bold;" %><br>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", style: "width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" %>
+    </div>
 
-<p>
-   <%= link_to "Back to Login", new_user_session_path %>
-   </p>
+    <div>
+      <%= f.submit "Sign up", style: "padding: 12px 30px; background-color: var(--retro-green); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px var(--retro-green);" %>
+    </div>
+  <% end %>
+
+  <p style="margin-top: 30px;">
+    <%= link_to "Back to Log In", new_user_session_path, style: "margin-right: 15px; color: var(--retro-blue);" %>
+    <%= link_to "Back to Home", home_path, style: "color: var(--retro-blue);" %>
+  </p>
+
+</div>

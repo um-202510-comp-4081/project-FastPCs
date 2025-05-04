@@ -16,8 +16,11 @@
  
 
 <nav class="main-nav">
-    <div class="nav-left">
-      <%= link_to "Home", home_path, class: "nav-item" %>
+  <div class="nav-left">
+    <%= link_to home_path, class: "nav-item" do %>
+      <%= image_tag "fast-pcs.png", alt: "FAST PC's Logo", style: "height: 50px;" %>
+    <% end %>
+  </div>
 
       <% if user_signed_in?%>
         <%=  link_to 'Cart', cart_path, class: 'nav-item' %>
