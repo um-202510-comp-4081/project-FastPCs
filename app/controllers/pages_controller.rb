@@ -15,7 +15,16 @@ class PagesController < ApplicationController
     end
 
     def accessories
-        render :accessories
+        if params[:category].present?
+            @accessories = Accessory.where("name LIKE ?", "%#{params[:category]}%")
+          else
+            @accessories = Accessory.order("RANDOM()").limit(6)
+          end
+        
+          respond_to do |format|
+            format.html              
+            format.turbo_stream      
+          end
     end
     
 end

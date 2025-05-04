@@ -16,8 +16,11 @@
 @import "yeti/variables";
 @import "bootstrap";
 @import "yeti/bootswatch";
-
+@import 'accessories';
 @import "rails_bootstrap_forms";
+@import 'cart';
+
+
 
 :root {
   --retro-purple: #6B3FA0;
@@ -170,6 +173,29 @@ main {
   transition: all 0.3s ease;
   background-color: rgba(51, 168, 255, 0.2);
   margin-left: 15px;
+}
+
+.flash-message {
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin: 1rem auto;
+  max-width: 800px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
+}
+
+.flash-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash-error {
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 .nav-button:hover {

@@ -9,22 +9,18 @@ class CartController < ApplicationController
 
   def destroy
     @cart = current_user.cart
+  
     if @cart
       @cart.destroy
-      respond_to do |format|
-        format.html do
-          flash[:success] = 'Cart has been cleared'
-          redirect_to cart_path
-        end
-        format.json { head :no_content }
-      end
+      flash[:success] = 'Cart has been cleared'
     else
-      respond_to do |format|
-        format.html { redirect_to cart_path, alert: 'Cart not found' }
-        format.json { render json: { error: 'Cart not found' }, status: :not_found }
-      end
+      flash[:error] = 'Cart not found'
     end
+  
+    redirect_to cart_path
   end
+  
+  
 
   def checkout
     card_number = params[:card_number]

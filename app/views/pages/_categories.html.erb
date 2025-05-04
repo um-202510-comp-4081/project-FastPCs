@@ -1,0 +1,40 @@
+<% selected_category = params[:category].to_s.downcase %>
+
+<div class="accessories-categories-container">
+  
+    <div class="accessory-categories <%= 'selected' if selected_category.blank? %>">
+        <%= link_to image_tag("accessories/all_icon.png", alt: "All"), accessories_path, data: { turbo_frame: "accessory-list" } %>
+        <p class="accessory-category-name">All</p>
+    </div>
+    
+    <div class="accessory-categories <%= 'selected' if selected_category == 'keyboard' %>">
+        <%= link_to image_tag("accessories/keyboard_icon.jpeg", alt: "Keyboard"), accessories_path(category: "Keyboard"), data: { turbo_frame: "accessory-list" } %>
+        <p class="accessory-category-name">Keyboard</p>
+    </div>
+    
+    <div class="accessory-categories <%= 'selected' if selected_category == 'mouse' %>">
+        <%= link_to image_tag("accessories/mouse_icon.png", alt: "Mouse"), accessories_path(category: "Mouse"), data: { turbo_frame: "accessory-list" } %>
+        <p class="accessory-category-name">Mouse</p>
+    </div>
+    
+    <div class="accessory-categories <%= 'selected' if selected_category == 'chair' %>">
+        <%= link_to image_tag("accessories/chair_icon.jpeg", alt: "Chair"), accessories_path(category: "Chair"), data: { turbo_frame: "accessory-list" } %>
+        <p class="accessory-category-name">Chair</p>
+    </div>
+    
+    <div class="accessory-categories <%= 'selected' if selected_category == 'webcam' %>">
+        <%= link_to image_tag("accessories/webcam_icon.jpg", alt: "Webcam"), accessories_path(category: "Webcam"), data: { turbo_frame: "accessory-list" } %>
+        <p class="accessory-category-name">Webcam</p>
+    </div>
+    
+    <div class="accessory-categories <%= 'selected' if selected_category == 'headset' %>">
+        <%= link_to image_tag("accessories/headset_icon.png", alt: "Headset"), accessories_path(category: "Headset"), data: { turbo_frame: "accessory-list" } %>
+        <p class="accessory-category-name">Headset</p>
+    </div>
+
+    <div class="accessory-categories <%= 'selected' if selected_category == 'monitor' %>">
+        <%= link_to image_tag("accessories/monitor_icon.jpeg", alt: "Monitor"), accessories_path(category: "Monitor"), data: { turbo_frame: "accessory-list" } %>
+        <p class="accessory-category-name">Monitor</p>
+    </div>
+  
+</div>
