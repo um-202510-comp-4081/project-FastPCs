@@ -1,5 +1,5 @@
+<%= image_tag @accessory.image, alt: @accessory.name, style: 'width: 350px; height: auto;' %>
 <h1><%= @accessory.name%> - <%= @accessory.price%></h1>
 <p><%= @accessory.description %></p>
 
 <%= button_to "Cart", cart_items_path(product_id: @accessory.product.id), method: :post, class: 'btn btn-success' %>
-<%= link_to "Back", accessories_path, class: 'btn btn-primary'%>

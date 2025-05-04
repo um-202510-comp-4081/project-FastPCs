@@ -7,13 +7,20 @@
 <ul>
 
     <% @cart.cart_items.includes(:product).each do |item| %>
-        <li><%= item.product.name%> - <%= item.product.description %> - $<%= item.product.price%> </li>
-         <td><%= button_to "Remove", cart_item_path(item), method: :delete, data: { turbo: false } %></td>
+
+        <li>
+            <%= image_tag item.product.image, alt: item.product.image, style: 'width: 100px; height: auto;' %>
+            <p><%= item.product.name%> - <%= item.product.description %> - $<%= item.product.price%></p>
+        </li>
+
+        <td><%= button_to "Remove", cart_item_path(item), method: :delete, data: { turbo: false } %></td>
         <% if item.product.product_type == 'BuildPC'%>
             <% build_pc = item.product.build_pc %>
             <%= link_to 'Edit', edit_build_pc_path(build_pc), class: 'btn btn-sm btn-primary' %>
             
         <% end%>
+
+
     <% end%>
     
 </ul>
@@ -22,4 +29,44 @@
 
 <% total_price = @cart.cart_items.sum { |item| item.product.price } %>
 
-checkout_btn <h3>Total - $<%= total_price%></h3>
+<h3>Total - $<%= total_price %></h3>
+
+<!-- Checkout Button -->
+<button onclick="document.getElementById('checkout-popup').style.display='block'" class="btn btn-success">
+  Checkout
+</button>
+
+<!-- Checkout Popup Form -->
+<div id="checkout-popup" style="display:none; position:fixed; top:20%; left:35%; background:white; border:1px solid #ccc; padding:20px; z-index:1000; box-shadow: 0px 0px 10px gray;">
+  <h2>Checkout</h2>
+  
+<% if flash[:success] %>
+  <div style="background:lightgreen; padding:10px; font-weight:bold; color:darkgreen;">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash[:error] %>
+  <div style="background:lightcoral; padding:10px; font-weight:bold; color:darkred;">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+  <%= form_with url: checkout_path, method: :post, local: true do %>
+    <div>
+      <label>Card Number</label><br>
+      <%= text_field_tag :card_number, nil, maxlength: 16, required: true, style: "width:100%;" %>
+    </div>
+    <div>
+      <label>Expiration Date</label><br>
+      <%= text_field_tag :exp_date, nil, placeholder: "MM/YY", required: true, style: "width:100%;" %>
+    </div>
+    <div>
+      <label>Security Code (CVV)</label><br>
+      <%= text_field_tag :cvv, nil, maxlength: 3, required: true, style: "width:100%;" %>
+    </div>
+    <br>
+    <%= submit_tag "Pay", class: "btn btn-primary" %>
+    <button type="button" onclick="document.getElementById('checkout-popup').style.display='none'" class="btn btn-secondary">
+      Cancel
+    </button>
+  <% end %>
+</div>

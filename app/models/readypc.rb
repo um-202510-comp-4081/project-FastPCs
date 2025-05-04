@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  brand      :string
 #  color      :string
+#  image      :string
 #  name       :string
 #  price      :decimal(, )
 #  processor  :string
