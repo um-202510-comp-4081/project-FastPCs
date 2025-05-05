@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   get '/headsets', to: 'accessories#headsets', as: 'headsets'
   get '/webcams', to: 'accessories#webcams', as: 'webcams'
 
-
   # ReadyToShipPC Routes
   get 'readytoship', to: 'pages#readytoship', as: 'readytoship'
   get 'readytoship/:id', to: 'pages#rtsshow', as: 'readytoships'
