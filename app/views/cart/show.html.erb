@@ -32,10 +32,10 @@
   </ul>
 
   <div class="cart-footer">
-    <%= button_to "Clear Cart", cart_path(@cart), method: :delete, class: "btn btn-warning", data: { turbo: false } %>
+    <%= button_to "Clear", cart_path(@cart), method: :delete, class: "btn btn-warning", data: { turbo: false } %>
     <h3 class="cart-total">Total: $<%= @cart.cart_items.sum { |item| item.product.price } %></h3>
     <button onclick="document.getElementById('checkout-popup').style.display='block'" class="btn btn-success checkout-btn">
-      Proceed to Checkout
+      Checkout
     </button>
   </div>
 </div>

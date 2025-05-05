@@ -44,7 +44,7 @@
   
   .cart-item-price {
     font-weight: bold;
-    color: #d32f2f;
+    color: #00CC66;
   }
   
   .cart-item-actions .btn {
@@ -65,6 +65,7 @@
   .checkout-btn {
     padding: 0.75rem 2rem;
     font-size: 1rem;
+    background-color: #00CC66;
   }
   
   .checkout-modal {
@@ -133,7 +134,7 @@
   
   .flash-success {
     background-color: #d4edda;
-    color: #155724;
+    color: #00CC66;
   }
   
   .flash-error, .flash-alert {
