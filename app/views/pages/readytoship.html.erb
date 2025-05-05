@@ -1,6 +1,17 @@
 <h1>Ready-To-Ship PCs</h1>
 <p>Choose from a premium selection of prebuilt PCs ready to ship to your house</p>
 
+<label for="sort-by">Sort by:</label>
+<select id="sort-by">
+  <option value="">Default</option>
+  <option value="price-asc">Price: Low to High</option>
+  <option value="price-desc">Price: High to Low</option>
+  <option value="name-asc">Name: A-Z</option>
+  <option value="name-desc">Name: Z-A</option>
+  <option value="ram-asc">RAM: Low to High</option>
+  <option value="ram-desc">RAM: High to Low</option>
+</select>
+
 <!-- Page-specific CSS -->
 <style>
   .image-grid {
@@ -34,9 +45,16 @@
 <!-- Link to pc show pages -->
 <div class="image-grid">
 <% @readypcs.each do |readypc| %>
-  <div class="pc-item">
+  <div class="pc-item" 
+       data-name="<%= readypc.name %>" 
+       data-price="<%= readypc.price %>" 
+       data-brand="<%= readypc.brand %>" 
+       data-ram="<%= readypc.ram %>">
     <%= link_to image_tag('placeholderlaptop.jpg', alt: "PC Image"), readytoships_path(readypc) %>
     <p class="pc-name"><%= readypc.name %></p>
+    <p class="pc-price">$<%= readypc.price %></p>
+    <p class="pc-brand"><%= readypc.brand %></p>
+    <p class="pc-ram"><%= readypc.ram %> GB RAM</p>
     <%= button_to "Cart", cart_items_path(product_id: readypc.product.id), method: :post, class: 'btn btn-success' %>
   </div>
 <% end %>
