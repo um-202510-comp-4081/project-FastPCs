@@ -8,7 +8,7 @@ ready_pcs = [
     storage: '2TB SSD',
     color: 'Glacier Silver',
     price: 1449.99,
-    image: 'placeholderlaptop.jpg' },
+    image: 'ready_pc/envy_2in1.jpg'},
 
   { brand: 'Apple',
     name: 'MacBook Pro',
@@ -18,7 +18,7 @@ ready_pcs = [
     storage: '512GB SSD',
     color: 'Space Black',
     price: 2499.00,
-    image: 'placeholderlaptop.jpg'},
+    image: 'ready_pc/mac_pro.jpg'},
 
   { brand: 'Samsung',
     name: 'Galaxy Book 4',
@@ -28,7 +28,7 @@ ready_pcs = [
     storage: '512GB SSD',
     color: 'Silver',
     price: 899.99,
-    image: 'placeholderlaptop.jpg'},
+    image: 'ready_pc/galaxy_book_4.jpg'},
 
   { brand: 'Lenovo',
     name: 'Yogi 7i 2-in-1',
@@ -38,7 +38,37 @@ ready_pcs = [
     storage: '1TB SSD',
     color: 'Storm Grey',
     price: 749.99,
-    image: 'placeholderlaptop.jpg'}
+    image: 'ready_pc/yogi_7i.jpg'},
+
+  { brand: 'Apple',
+    name: 'MacBook Air',
+    size: 13,
+    processor: 'Apple M4',
+    ram: 16,
+    storage: '256GB SSD',
+    color: 'Midnight Black',
+    price: 849.00,
+    image: 'ready_pc/apple_air.jpg'},
+
+    { brand: 'Lenovo',
+    name: 'IdeaPad Slim',
+    size: 15.6,
+    processor: 'AMD Ryzen 7 5825U',
+    ram: 16,
+    storage: '512GB SSD',
+    color: 'Arctic Grey',
+    price: 499.99,
+    image: 'ready_pc/ideapad.jpg'},
+
+    { brand: 'HP',
+    name: 'Envy',
+    size: 17.3,
+    processor: 'Intel Core Ultra 7',
+    ram: 16,
+    storage: '1TB SSD',
+    color: 'Glacier Silver',
+    price: 1429.99,
+    image: 'ready_pc/envy.jpg'},
 ]
 
 ready_pcs.each do |spec|
