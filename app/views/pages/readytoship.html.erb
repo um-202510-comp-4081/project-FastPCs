@@ -50,7 +50,7 @@
        data-price="<%= readypc.price %>" 
        data-brand="<%= readypc.brand %>" 
        data-ram="<%= readypc.ram %>">
-    <%= link_to image_tag('placeholderlaptop.jpg', alt: "PC Image"), readytoships_path(readypc) %>
+    <%= link_to image_tag(readypc.image, alt: "PC Image"), readytoships_path(readypc) %>
     <p class="pc-name"><%= readypc.name %></p>
     <p class="pc-price">$<%= readypc.price %></p>
     <p class="pc-brand"><%= readypc.brand %></p>

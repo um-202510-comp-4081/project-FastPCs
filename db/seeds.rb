@@ -89,6 +89,7 @@ ready_pcs.each do |spec|
     storage: spec[:storage],
     color: spec[:color],
     price: spec[:price],
+    image: spec[:image],
     product: product
   )
 end
