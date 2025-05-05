@@ -2,19 +2,27 @@
 
 class BuildPcsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @build_pc = BuildPc.new
+    @descriptions = BuildPc.all_descriptions
     render :new
   end
-  
+
+  def edit
+    @build_pc = BuildPc.find(params[:id])
+    @descriptions = BuildPc.all_descriptions
+    render :edit
+  end
+
   def create
     build_pc_product = Product.create!(
-      name: params[:build_pc][:name],
-      price: params[:build_pc][:price],
-      description: "#{params[:build_pc][:cpu]}, #{params[:build_pc][:gpu]}, #{params[:build_pc][:ram]} RAM, #{params[:build_pc][:storage]} storage, #{params[:build_pc][:mobo]} motherboard",
+      name:         params[:build_pc][:name],
+      price:        params[:build_pc][:price],
+      description:  "#{params[:build_pc][:cpu]}, #{params[:build_pc][:gpu]}, #{params[:build_pc][:ram]} RAM, #{params[:build_pc][:storage]} storage, #{params[:build_pc][:mobo]} motherboard",
       product_type: 'BuildPC',
-      image: 'build_pc/image.jpg')
+      image:        'build_pc/image.jpg'
+    )
 
     @build_pc = BuildPc.new(params.require(:build_pc).permit(:name, :cpu, :gpu, :ram, :storage, :mobo, :price))
     @build_pc.product = build_pc_product
@@ -24,37 +32,30 @@ class BuildPcsController < ApplicationController
       current_user.cart.cart_items.create!(product: build_pc_product)
       redirect_to cart_path
     else
-      flash.now[:error] = "Failed to build custom pc"
+      flash.now[:error] = 'Failed to build custom pc'
       render :new
     end
-    
-  end
-
-  def edit
-    @build_pc = BuildPc.find(params[:id])
-    render :edit
   end
 
   def update
     @build_pc = BuildPc.find(params[:id])
 
-      if @build_pc.update(build_pc_params)
-        new_price = @build_pc.calculate_total_price
-        @build_pc.update_column(:price, new_price)
+    if @build_pc.update(build_pc_params)
+      new_price = @build_pc.calculate_total_price
+      @build_pc.update_column(:price, new_price)
 
-        @build_pc.product.update(
-          name: @build_pc.name,
-          price: new_price,
-          description: "#{@build_pc.cpu}, #{@build_pc.gpu}, #{@build_pc.ram} RAM, #{@build_pc.storage} storage, #{@build_pc.mobo} motherboard"
-        )
+      @build_pc.product.update(
+        name:        @build_pc.name,
+        price:       new_price,
+        description: "#{@build_pc.cpu}, #{@build_pc.gpu}, #{@build_pc.ram} RAM, #{@build_pc.storage} storage, #{@build_pc.mobo} motherboard"
+      )
 
-        redirect_to cart_path, notice: "#{@build_pc.name} has been updated"
-      
-      else
-        render :edit
+      redirect_to cart_path, notice: "#{@build_pc.name} has been updated"
 
-      end
+    else
+      render :edit
 
+    end
   end
 
   private
@@ -64,5 +65,4 @@ class BuildPcsController < ApplicationController
       .require(:build_pc)
       .permit(:name, :cpu, :gpu, :ram, :storage, :mobo, :price)
   end
-
 end

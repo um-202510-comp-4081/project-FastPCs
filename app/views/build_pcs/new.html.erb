@@ -1,34 +1,66 @@
 <h1> Build Your Custom PC </h1>
 
-<%= bootstrap_form_with model: @build_pc, url: build_path,  method: :post, data: { turbo: false } do |f| %>
-  <div class='field'>
-    <%= f.label :name, 'PC Name'%>
-    <%= f.text_field :name %>
-    
-    <%= f.label :cpu, 'CPU'%>
-    <%= f.select :cpu, BuildPc::CPU_PRICES.keys, {include_blank: true}, {required: true, id: 'cpu-select'} %>
+<%= bootstrap_form_with model: @build_pc, local: true, data: { turbo: false } do |f| %>
+  <div class="field">
+    <%= f.text_field :name,
+          label: 'PC Name',
+          class: 'input hover-info',
+          data: { description: 'Enter the name of your PC.' } %>
 
-    <%= f.label :gpu, 'GPU'%>
-    <%= f.select :gpu, BuildPc::GPU_PRICES.keys, {include_blank: true}, {required: true, id: 'gpu-select'} %>
+    <%= f.select :cpu, BuildPc::CPU_PRICES.keys,
+          { include_blank: true, label: 'CPU' },
+          {
+            id: 'cpu-select',
+            class: 'hover-info',
+            data: { description: @descriptions[:cpu].to_json }
+          } %>
 
+    <%= f.select :gpu, BuildPc::GPU_PRICES.keys,
+          { include_blank: true, label: 'GPU' },
+          {
+            id: 'gpu-select',
+            class: 'hover-info',
+            data: { description: @descriptions[:gpu].to_json }
+          } %>
 
-    <%= f.label :ram, 'RAM'%>
-    <%= f.select :ram, BuildPc::RAM_PRICES.keys, {include_blank: true}, {required: true, id: 'ram-select'} %>
+    <%= f.select :ram, BuildPc::RAM_PRICES.keys,
+          { include_blank: true, label: 'RAM' },
+          {
+            id: 'ram-select',
+            class: 'hover-info',
+            data: { description: @descriptions[:ram].to_json }
+          } %>
 
-    <%= f.label :storage, 'Storage'%>
-    <%= f.select :storage, BuildPc::STORAGE_PRICES.keys, {include_blank: true}, {required: true, id: 'storage-select'} %>
-    
-    <%= f.label :mobo, 'MOBO'%>
-    <%= f.select :mobo, BuildPc::MOBO_PRICES.keys, {include_blank: true}, {required: true, id: 'mobo-select'} %>
+    <%= f.select :storage, BuildPc::STORAGE_PRICES.keys,
+          { include_blank: true, label: 'Storage' },
+          {
+            id: 'storage-select',
+            class: 'hover-info',
+            data: { description: @descriptions[:storage].to_json }
+          } %>
 
-    <%= f.label :price, 'Total'%>
-    <%= f.text_field :price, readonly: true, id: 'price-field' %>
-  
+    <%= f.select :mobo, BuildPc::MOBO_PRICES.keys,
+          { include_blank: true, label: 'MOBO' },
+          {
+            id: 'mobo-select',
+            class: 'hover-info',
+            data: { description: @descriptions[:mobo].to_json }
+          } %>
+
+    <%= f.text_field :price,
+          label: 'Total',
+          readonly: true,
+          id: 'price-field',
+          class: 'hover-info' %>
   </div>
-  
-    <%= f.submit "Build" %>
 
+  <%= f.submit "Build", class: "field-btn" %>
 <% end %>
+
+<div id="info-box" class="info-box">
+  Select a part and hover to see more information.
+</div>
+
 
 <script>
   // Run on initial page load
@@ -116,4 +148,31 @@
 
     calculateTotal();
   });
+
+// Dynamic Hover Script
+function initializeHoverDescriptions() {
+  const fields = document.querySelectorAll(".hover-info");
+  const infoBox = document.getElementById("info-box");
+
+  fields.forEach(field => {
+    field.addEventListener("mouseenter", () => {
+      const descriptions = JSON.parse(field.dataset.description);
+      const selectedOption = field.options[field.selectedIndex].text;
+      infoBox.textContent = descriptions[selectedOption] || "No description available.";
+    });
+
+    field.addEventListener("mouseleave", () => {
+      infoBox.textContent = "Select a part and hover to see more information.";
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initializeHoverDescriptions();
+});
+
+document.addEventListener("turbo:load", () => {
+  initializeHoverDescriptions();
+});
+
 </script>
