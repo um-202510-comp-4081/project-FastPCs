@@ -9,3 +9,7 @@
 
 ## How to Initialize and Run the App
 ...
+
+## Deployed Website Link
+
+- https://fastpcwebsite.onrender.com/
